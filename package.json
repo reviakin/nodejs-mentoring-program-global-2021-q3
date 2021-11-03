@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -p .",
-    "task1": "nodemon src/task1/index.ts",
-    "task2": "nodemon src/task2/index.ts"
+    "task1": "nodemon src/module2/task1/index.ts",
+    "task2": "nodemon src/module2/task2/index.ts"
   },
   "repository": {
     "type": "git",
