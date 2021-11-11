@@ -32,32 +32,53 @@ class UserController {
 }
 
 class UserRequestHandlers {
-  static getUserRequestHandler: RequestHandler = (req, res, next) => {
-    const userId = req.params.id;
-    res.send(UserController.getUserById(userId));
+  static getUserRequestHandler: RequestHandler = (req, res) => {
+    UserController.getUserById(req.params.id)
+      .then(function (user) {
+        res.status(200).json({ data: user });
+      })
+      .catch(function (error) {
+        res.status(400).json({ data: error });
+      });
   };
-  static createUserRequestHandler: RequestHandler = (req, res, next) => {
-    const user = req.body.user;
-    res.send(UserController.createUser(user));
+  static createUserRequestHandler: RequestHandler = async (req, res) => {
+    UserController.createUser(req.body.user)
+      .then(function (user) {
+        res.status(201).json({ data: user });
+      })
+      .catch(function (error) {
+        res.status(400).json({ data: error });
+      });
   };
-  static updateUserRequestHandler: RequestHandler = (req, res, next) => {
-    const user = req.body.user;
-    const userId = req.body.id;
-    res.send(UserController.updateUser(userId, user));
+  static updateUserRequestHandler: RequestHandler = (req, res) => {
+    UserController.updateUser(req.body.id, req.body.user)
+      .then(function (user) {
+        res.status(200).json({ data: user });
+      })
+      .catch(function (error) {
+        res.status(400).json({ data: error });
+      });
   };
-  static removeUserRequestHandler: RequestHandler = (req, res, next) => {
-    const userId = req.params.id;
-    res.send(UserController.removeUser(userId));
+  static removeUserRequestHandler: RequestHandler = (req, res) => {
+    UserController.removeUser(req.params.id)
+      .then(function (user) {
+        res.status(200).json({ data: user });
+      })
+      .catch(function (error) {
+        res.status(400).json({ data: error });
+      });
   };
-  static getAutoSuggestUserRequestHandler: RequestHandler = (
-    req,
-    res,
-    next
-  ) => {
+  static getAutoSuggestUserRequestHandler: RequestHandler = (req, res) => {
     const limit = parseInt(req.query.limit?.toString() || "10", 10);
     const loginSubstring = req.query.subStr?.toString() || "";
 
-    res.send(UserController.getAutoSuggestUsers(loginSubstring, limit));
+    UserController.getAutoSuggestUsers(loginSubstring, limit)
+      .then(function (users) {
+        res.status(200).json({ data: users });
+      })
+      .catch(function (error) {
+        res.status(400).json({ data: error });
+      });
   };
 }
 
