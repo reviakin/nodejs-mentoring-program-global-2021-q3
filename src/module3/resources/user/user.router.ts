@@ -1,18 +1,16 @@
 import { Router } from "express";
-import { requestHandlers } from "./user.controllers";
+import { UserRequestHandlers } from "./user.requestHandlers";
+import {
+  createUserValidation,
+  updateUserValidation,
+} from "./user.validationMiddleware";
 
-const {
-  getUserRequestHandler,
-  createUserRequestHandler,
-  updateUserRequestHandler,
-  removeUserRequestHandler,
-  getAutoSuggestUserRequestHandler,
-} = requestHandlers;
 const userRouter = Router();
 
-userRouter.get("/:id", getUserRequestHandler);
+userRouter.get("/list", UserRequestHandlers.getAutoSuggestUsers);
+userRouter.get("/:id", UserRequestHandlers.getUser);
+userRouter.post("/", createUserValidation, UserRequestHandlers.createUser);
+userRouter.put("/", updateUserValidation, UserRequestHandlers.updateUser);
+userRouter.delete("/:id", UserRequestHandlers.removeUser);
 
-userRouter.post("/", createUserRequestHandler);
-userRouter.put("/", updateUserRequestHandler);
-userRouter.delete("/:id", removeUserRequestHandler);
-userRouter.get("/:id", getAutoSuggestUserRequestHandler);
+export { userRouter };

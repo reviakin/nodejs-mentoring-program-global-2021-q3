@@ -1,14 +1,4 @@
-type UserType = {
-  id: string;
-  login: string;
-  password: string;
-  age: number;
-  isDeleted: boolean;
-};
-
-type Users = {
-  [id: string]: UserType;
-};
+import { IUsers, UserType } from "./user.schema";
 
 class Model {
   findMany(filterInput: Partial<UserType>): Array<UserType> {
@@ -50,8 +40,9 @@ class Model {
   add(users: Array<UserType>): Array<UserType> {
     let output: Array<UserType> = [];
     users.forEach((user) => {
-      this.users[user.id] = user;
-      output.push(user);
+      const { id = String(Math.random() * 10 ** 10), isDeleted = false } = user;
+      this.users[id] = { ...user, id, isDeleted };
+      output.push(this.users[id]);
     });
     return output;
   }
@@ -87,13 +78,13 @@ class Model {
     }
     return output;
   }
-  private users: Users;
-  constructor(users: Users = {}) {
+  private users: IUsers;
+  constructor(users: IUsers = {}) {
     this.users = users;
   }
 }
 
-function createUserModel(users?: Users) {
+function createUserModel(users?: IUsers) {
   return new Model(users);
 }
 const UserModel = createUserModel();
