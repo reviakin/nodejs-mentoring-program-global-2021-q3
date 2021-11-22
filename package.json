@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint ./src",
     "build": "tsc -p .",
     "task1": "nodemon src/module2/task1/index.ts",
-    "task2": "nodemon src/module2/task2/index.ts"
+    "task2": "nodemon src/module2/task2/index.ts",
+    "module3": "nodemon src/module3/index.ts"
   },
   "repository": {
     "type": "git",
@@ -20,12 +22,19 @@
   },
   "homepage": "https://github.com/reviakin/node_mentoring_program_global_2021_q3#readme",
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/node": "^16.11.5",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.3.0",
     "nodemon": "^2.0.14",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "csvtojson": "^2.0.10"
+    "csvtojson": "^2.0.10",
+    "express": "^4.17.1",
+    "express-joi-validation": "^5.0.0",
+    "joi": "^17.4.2"
   }
 }
