@@ -27,7 +27,7 @@ class UserController {
     return output;
   }
   static async removeUser(id: string): Promise<UserType | undefined> {
-    let output = UserModel.update([{ id, user: { isDeleted: true } }])[0];
+    const output = UserModel.update([{ id, user: { isDeleted: true } }])[0];
     return output;
   }
 }

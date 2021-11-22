@@ -38,7 +38,7 @@ class Model {
     return output;
   }
   add(users: Array<UserType>): Array<UserType> {
-    let output: Array<UserType> = [];
+    const output: Array<UserType> = [];
     users.forEach((user) => {
       const { id = String(Math.random() * 10 ** 10), isDeleted = false } = user;
       this.users[id] = { ...user, id, isDeleted };
@@ -49,7 +49,7 @@ class Model {
   update(
     input: Array<{ id: string; user: Partial<UserType> }>
   ): Array<UserType | undefined> {
-    let output: Array<UserType | undefined> = [];
+    const output: Array<UserType | undefined> = [];
     input.forEach(({ id, user }) => {
       let userItem;
 
