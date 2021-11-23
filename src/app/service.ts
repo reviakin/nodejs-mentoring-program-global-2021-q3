@@ -1,11 +1,10 @@
 import express from "express";
 import { PORT, HOSTNAME, PROTOCOL } from "../config";
 import { userRouter } from "./resources/user/user.router";
-import { json } from "body-parser";
 
 const service = express();
 
-service.use(json());
+service.use(express.json());
 service.use("/user", userRouter);
 
 function start() {

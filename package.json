@@ -8,7 +8,7 @@
     "build": "tsc -p .",
     "task1": "nodemon src/module2/task1/index.ts",
     "task2": "nodemon src/module2/task2/index.ts",
-    "module3": "nodemon src/module3/index.ts"
+    "module3": "nodemon src/app/index.ts"
   },
   "repository": {
     "type": "git",
