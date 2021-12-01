@@ -1,3 +1,3 @@
-import { start } from "./service";
+import { start } from "./start";
 
 start();
