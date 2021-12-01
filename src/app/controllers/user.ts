@@ -4,7 +4,7 @@ import { IPreUserDto, IUserDto } from "../dto/user";
 import { IUserService } from "../services";
 import { IRequest, IResponse, IUserController } from "./interfaces";
 
-class UserController implements IUserController {
+class UserController {
   #userService: IUserService;
   constructor(service: IUserService) {
     this.#userService = service;

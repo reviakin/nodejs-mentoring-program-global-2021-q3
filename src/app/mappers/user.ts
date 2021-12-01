@@ -1,6 +1,7 @@
-import { IUserInstance, IUser } from "../types";
+import { IUserDto } from "../dto";
+import { IUserInstance } from "../models/user/interfaces";
 
-const userMapper = (userInstance: IUserInstance): IUser => ({
+const userMapper = (userInstance: IUserInstance): IUserDto => ({
   id: userInstance.id,
   login: userInstance.login,
   password: userInstance.password,

@@ -25,7 +25,7 @@ class UserRepository implements IUserRepository {
       return undefined;
     });
 
-  updateOneById = (id: string, updates: IPreUserDto) =>
+  updateOneById = (id: string, updates: Partial<IPreUserDto>) =>
     this.#userModel.findByPk(id).then((user) => {
       if (user) {
         user.update(updates);

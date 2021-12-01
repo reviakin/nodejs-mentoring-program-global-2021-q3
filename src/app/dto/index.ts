@@ -1,3 +1,3 @@
-import { UserDto, PreUserDto } from "./user";
+import { IUserDto, IPreUserDto } from "./user";
 
-export { UserDto, PreUserDto };
+export { IUserDto, IPreUserDto };

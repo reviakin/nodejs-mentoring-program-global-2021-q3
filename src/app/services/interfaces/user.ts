@@ -1,14 +1,14 @@
-import { PreUserDto, UserDto } from "../../dto";
+import { IPreUserDto, IUserDto } from "../../dto";
 
 interface IUserService {
-  getOneById: (id: string) => Promise<UserDto | undefined>;
-  createOne: (user: PreUserDto) => Promise<UserDto>;
-  deleteOneById: (id: string) => Promise<UserDto | undefined>;
+  getOneById: (id: string) => Promise<IUserDto | undefined>;
+  createOne: (user: IPreUserDto) => Promise<IUserDto>;
+  deleteOneById: (id: string) => Promise<IUserDto | undefined>;
   updateOneById: (
     id: string,
-    updates: Partial<PreUserDto>
-  ) => Promise<UserDto | undefined>;
-  getSuggestions: (login: string, limit: number) => Promise<Array<UserDto>>;
+    updates: Partial<IPreUserDto>
+  ) => Promise<IUserDto | undefined>;
+  getSuggestions: (login: string, limit: number) => Promise<Array<IUserDto>>;
 }
 
 export { IUserService };

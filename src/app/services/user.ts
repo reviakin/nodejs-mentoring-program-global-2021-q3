@@ -20,7 +20,7 @@ class UserService implements IUserService {
     return this.#userRepositories.getSuggestions(substring, limit);
   };
 
-  updateOneById = (id: string, updates: IPreUserDto) => {
+  updateOneById = (id: string, updates: Partial<IPreUserDto>) => {
     return this.#userRepositories.updateOneById(id, updates);
   };
   deleteOneById = (id: string) => {

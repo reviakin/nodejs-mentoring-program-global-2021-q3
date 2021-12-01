@@ -1,10 +1,20 @@
-import { Sequelize, Options } from "sequelize";
+import { Sequelize } from "sequelize";
+import { db as dbConfig } from "../../config";
 
-const createConnection = (options: Options) => {
-  return new Sequelize(options);
+const createConnection = () => {
+  const output = new Sequelize(
+    dbConfig.PG_DATABASE,
+    dbConfig.PG_USER,
+    dbConfig.PG_PASSWORD,
+    {
+      host: dbConfig.PG_HOST,
+      dialect: "postgres",
+    }
+  );
+
+  return output;
 };
 
-const connectOptions = {};
-const connection = createConnection(connectOptions);
+const connection = createConnection();
 
 export { connection };
