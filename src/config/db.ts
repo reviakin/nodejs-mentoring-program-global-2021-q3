@@ -1,17 +1,22 @@
 const defaultConfig = {
-  PG_DATABASE: "rest_dev",
-  PG_USER: "root",
-  PG_PASSWORD: "11111111",
-  PG_HOST: "127.0.0.1",
-  PG_PORT: 5432,
+  POSTGRES_DB: "database",
+  POSTGRES_USER: "user",
+  POSTGRES_PASSWORD: "password",
+  POSTGRES_HOST: "127.0.0.1",
+  POSTGRES_PORT: 5432,
+  DATABASE_URL: "postgres://username:pgpassword@127.0.0.1:5432/mydatabase",
 };
 
 const db = {
-  PG_HOST: process.env.PG_HOST || defaultConfig.PG_HOST,
-  PG_USER: process.env.PG_USER || defaultConfig.PG_USER,
-  PG_PASSWORD: process.env.PG_PASSWORD || defaultConfig.PG_PASSWORD,
-  PG_DATABASE: process.env.PG_DATABASE || defaultConfig.PG_DATABASE,
-  PG_PORT: process.env.PG_PORT || defaultConfig.PG_PORT,
+  POSTGRES_HOST: process.env.POSTGRES_HOST || defaultConfig.POSTGRES_HOST,
+  POSTGRES_USER: process.env.POSTGRES_USER || defaultConfig.POSTGRES_USER,
+  POSTGRES_PASSWORD:
+    process.env.POSTGRES_PASSWORD || defaultConfig.POSTGRES_PASSWORD,
+  POSTGRES_DB: process.env.POSTGRES_DB || defaultConfig.POSTGRES_DB,
+  POSTGRES_PORT: process.env.POSTGRES_PORT
+    ? Number(process.env.POSTGRES_PORT)
+    : defaultConfig.POSTGRES_PORT,
+  DATABASE_URL: process.env.DATABASE_URL || defaultConfig.DATABASE_URL,
 };
 
 export { db };

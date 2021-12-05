@@ -1,5 +1,5 @@
-const DEFAULT_HOSTNAME = "127.0.0.1";
+const DEFAULT_HOSTNAME = "localhost";
 
-const HOSTNAME = process.env.hostname || DEFAULT_HOSTNAME;
+const HOSTNAME = process.env.HOSTNAME || DEFAULT_HOSTNAME;
 
 export { HOSTNAME };
