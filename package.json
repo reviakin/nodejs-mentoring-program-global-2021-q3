@@ -8,7 +8,7 @@
     "build": "tsc -p .",
     "task1": "nodemon src/module2/task1/index.ts",
     "task2": "nodemon src/module2/task2/index.ts",
-    "module3": "nodemon src/module3/index.ts"
+    "module3": "nodemon src/app/index.ts"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,10 @@
     "csvtojson": "^2.0.10",
     "express": "^4.17.1",
     "express-joi-validation": "^5.0.0",
-    "joi": "^17.4.2"
+    "joi": "^17.4.2",
+    "joi-password-complexity": "^5.1.0",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.12.0-alpha.1"
   }
 }
