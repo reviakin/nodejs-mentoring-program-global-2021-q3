@@ -1,4 +1,5 @@
 import { UserRepository } from "./user";
-import { IUserRepository } from "./interfaces";
+import { IUserRepository, IGroupRepository } from "./interfaces";
+import { GroupRepository } from "./group";
 
-export { UserRepository, IUserRepository };
+export { UserRepository, IUserRepository, IGroupRepository, GroupRepository };

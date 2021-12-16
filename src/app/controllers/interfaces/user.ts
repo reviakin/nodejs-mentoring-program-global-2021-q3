@@ -1,4 +1,4 @@
-import { IPreUserDto, IUserDto } from "../../dto/user";
+import { IPreUserDto, IUserDto } from "../../dto";
 import { IErrorResponse } from "../../errors/interfaces";
 import { IRequest } from "./request";
 import { ParamsDictionary } from "express-serve-static-core";

@@ -1,3 +1,4 @@
 import { UserModel, userMapper } from "./user";
+import { GroupModel } from "./group";
 
-export { UserModel, userMapper };
+export { UserModel, userMapper, GroupModel };
