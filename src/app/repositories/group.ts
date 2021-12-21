@@ -1,5 +1,6 @@
 import { ModelCtor } from "sequelize";
-import { IPreGroupDto } from "../dto";
+import { IGroupDtoWithUsers, IPreGroupDto } from "../dto";
+import { UserModel } from "../models";
 import { IGroupMapper, IGroupInstance } from "../models/group/interfaces";
 import { IGroupRepository } from "./interfaces";
 
@@ -19,10 +20,10 @@ class GroupRepository implements IGroupRepository {
     this.#GroupModel.create(Group).then(this.#GroupMapper);
 
   deleteOneById = (id: string) =>
-    this.#GroupModel.findByPk(id).then((Group) => {
-      if (Group) {
-        Group.destroy();
-        return this.#GroupMapper(Group);
+    this.#GroupModel.findByPk(id, { include: UserModel }).then((group) => {
+      if (group) {
+        group.destroy();
+        return this.#GroupMapper(group);
       }
       return undefined;
     });

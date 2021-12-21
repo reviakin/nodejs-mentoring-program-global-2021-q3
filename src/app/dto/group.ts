@@ -1,3 +1,5 @@
+import { IUserDto } from ".";
+
 enum IPermission {
   "READ",
   "WRITE",
@@ -14,4 +16,8 @@ interface IGroupDto {
 
 type IPreGroupDto = Omit<IGroupDto, "id">;
 
-export { IPreGroupDto, IGroupDto, IPermission };
+interface IGroupDtoWithUsers extends IPreGroupDto {
+  users: Array<IUserDto>;
+}
+
+export { IPreGroupDto, IGroupDto, IPermission, IGroupDtoWithUsers };

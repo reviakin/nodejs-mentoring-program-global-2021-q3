@@ -1,11 +1,17 @@
 import { IGroupRepository } from "../repositories";
-import { IPreGroupDto } from "../dto";
+import { IGroupDtoWithUsers, IPreGroupDto } from "../dto";
 import { IGroupService } from "./interfaces";
+import { IUserGroupRepository } from "../repositories/interfaces/userGroup";
 
 class GroupService implements IGroupService {
   #groupRepositories: IGroupRepository;
-  constructor(repositories: IGroupRepository) {
-    this.#groupRepositories = repositories;
+  #userGroupRepository: IUserGroupRepository;
+  constructor(
+    groupRepository: IGroupRepository,
+    userGroupRepository: IUserGroupRepository
+  ) {
+    this.#groupRepositories = groupRepository;
+    this.#userGroupRepository = userGroupRepository;
   }
 
   createOne = (user: IPreGroupDto) => {
@@ -26,6 +32,10 @@ class GroupService implements IGroupService {
 
   deleteOneById = (id: string) => {
     return this.#groupRepositories.deleteOneById(id);
+  };
+
+  addUsersToGroup = (groupId: string, userIds: string[]) => {
+    return this.#userGroupRepository.addUsersToGroup(groupId, userIds);
   };
 }
 

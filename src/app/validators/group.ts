@@ -28,6 +28,10 @@ const updateGroupSchema = Joi.object().keys({
   permissions: groupPermissionsSchema,
 });
 
+const addUsersToGroupSchema = Joi.object().keys({
+  userIds: Joi.array().required(),
+});
+
 const validateUpdateGroupBody: RequestHandler = (req, res, next) => {
   const { error } = validate(req.body, updateGroupSchema);
 
@@ -47,4 +51,17 @@ const validateCreateGroupBody: RequestHandler = (req, res, next) => {
   return res.status(400).json({ data: error });
 };
 
-export { validateCreateGroupBody, validateUpdateGroupBody };
+const validateAddUsersToGroup: RequestHandler = (req, res, next) => {
+  const { error } = validate(req.body, addUsersToGroupSchema);
+  if (!error) {
+    return next();
+  }
+
+  return res.status(400).json({ data: error });
+};
+
+export {
+  validateCreateGroupBody,
+  validateUpdateGroupBody,
+  validateAddUsersToGroup,
+};

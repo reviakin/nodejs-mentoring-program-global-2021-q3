@@ -11,8 +11,8 @@ class GroupController implements IGroupController {
 
   getOneById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const user = await this.#groupService.getOneById(req.params.id);
-      res.send(user);
+      const group = await this.#groupService.getOneById(req.params.id);
+      res.send(group);
     } catch (error) {
       next(error);
     }
@@ -20,35 +20,46 @@ class GroupController implements IGroupController {
 
   createOne = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const user = await this.#groupService.createOne(req.body);
-      return res.send(user);
+      const group = await this.#groupService.createOne(req.body);
+      return res.send(group);
     } catch (error) {
       next(error);
     }
   };
   updateOneById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const user = await this.#groupService.updateOneById(
+      const group = await this.#groupService.updateOneById(
         req.params.id,
         req.body
       );
-      return res.send(user);
+      return res.send(group);
     } catch (error) {
       next(error);
     }
   };
   deleteOneById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const user = await this.#groupService.deleteOneById(req.params.id);
-      return res.send(user);
+      const group = await this.#groupService.deleteOneById(req.params.id);
+      return res.send(group);
     } catch (error) {
       next(error);
     }
   };
   getMany = async (_: Request, res: Response, next: NextFunction) => {
     try {
-      const users = await this.#groupService.getMany();
-      res.send(users);
+      const groups = await this.#groupService.getMany();
+      res.send(groups);
+    } catch (error) {
+      next(error);
+    }
+  };
+  addUsersToGroup = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const group = await this.#groupService.addUsersToGroup(
+        req.params.id,
+        req.body.userIds
+      );
+      res.send(group);
     } catch (error) {
       next(error);
     }

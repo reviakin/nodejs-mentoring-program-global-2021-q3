@@ -1,4 +1,4 @@
 import { IUserDto, IPreUserDto } from "./user";
-import { IPreGroupDto, IGroupDto } from "./group";
+import { IPreGroupDto, IGroupDto, IGroupDtoWithUsers } from "./group";
 
-export { IUserDto, IPreUserDto, IPreGroupDto, IGroupDto };
+export { IUserDto, IPreUserDto, IPreGroupDto, IGroupDto, IGroupDtoWithUsers };
