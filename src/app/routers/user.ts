@@ -34,4 +34,4 @@ const userRouter = Router()
   // delete a user
   .delete("/:id", validateIdInParams, userController.deleteOneById);
 
-export { userRouter, BASE_ROUTE_PATH };
+export { userRouter, BASE_ROUTE_PATH as BASE_USER_ROUTE_PATH };

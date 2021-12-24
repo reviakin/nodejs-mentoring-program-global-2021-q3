@@ -1,5 +1,6 @@
-import { IUserController } from "./user";
 import { IRequest } from "./request";
 import { IResponse } from "./response";
+import { IUserController } from "./user";
+import { IGroupController } from "./group";
 
-export { IUserController, IRequest, IResponse };
+export { IRequest, IResponse, IUserController, IGroupController };

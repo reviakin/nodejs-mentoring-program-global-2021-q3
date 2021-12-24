@@ -1,4 +1,5 @@
+import { IUserService, IGroupService } from "./interfaces";
 import { UserService } from "./user";
-import { IUserService } from "./interfaces";
+import { GroupService } from "./group";
 
-export { UserService, IUserService };
+export { UserService, IUserService, GroupService, IGroupService };

@@ -18,9 +18,9 @@ const createUserSchema = Joi.object().keys({
 });
 
 const updateUserSchema = Joi.object().keys({
-  login: Joi.string().required(),
-  password: passwordComplexity(passwordConfig).required(),
-  age: Joi.number().min(4).max(130).required(),
+  login: Joi.string(),
+  password: passwordComplexity(passwordConfig),
+  age: Joi.number().min(4).max(130),
 });
 
 const getSuggestionsSchema = Joi.object().keys({
@@ -36,14 +36,6 @@ const validateParamsForSuggestions: RequestHandler = (req, res, next) => {
     },
     getSuggestionsSchema
   );
-  if (!error) {
-    return next();
-  }
-  return res.status(400).json(error);
-};
-
-const validateIdInParams: RequestHandler = (req, res, next) => {
-  const { error } = validate(req.params.id, Joi.string().required());
   if (!error) {
     return next();
   }
