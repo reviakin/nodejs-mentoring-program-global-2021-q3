@@ -1,13 +1,22 @@
-import { NextFunction } from "express";
+import { NextFunction, Request } from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { IPreUserDto, IUserDto } from "../dto/user";
 import { IUserService } from "../services";
-import { IRequest, IResponse, IUserController } from "./interfaces";
+import { IRequest, IResponse } from "./interfaces";
+import { createLogger } from "../../utils";
+import { Logger } from "winston";
+import { logError } from "../../utils";
 
 class UserController {
   #userService: IUserService;
+  #logger: Logger;
+  #logError: (method: string, request: Request, error: unknown) => void;
+
   constructor(service: IUserService) {
     this.#userService = service;
+    this.#logger = createLogger("USER CONTROLLER");
+    this.#logError = (method: string, request: Request, error: unknown) =>
+      logError(this.#logger, method, request, error);
   }
 
   getOneById = async (
@@ -19,6 +28,7 @@ class UserController {
       const user = await this.#userService.getOneById(req.params.id);
       res.send(user);
     } catch (error) {
+      this.#logError(this.getOneById.name, req, error);
       next(error);
     }
   };
@@ -31,6 +41,7 @@ class UserController {
       const user = await this.#userService.createOne(req.body);
       return res.send(user);
     } catch (error) {
+      this.#logError(this.createOne.name, req, error);
       next(error);
     }
   };
@@ -46,6 +57,7 @@ class UserController {
       );
       return res.send(user);
     } catch (error) {
+      this.#logError(this.updateOneById.name, req, error);
       next(error);
     }
   };
@@ -58,6 +70,7 @@ class UserController {
       const user = await this.#userService.deleteOneById(req.params.id);
       return res.send(user);
     } catch (error) {
+      this.#logError(this.deleteOneById.name, req, error);
       next(error);
     }
   };
@@ -73,6 +86,7 @@ class UserController {
       );
       res.send(users);
     } catch (error) {
+      this.#logError(this.getSuggestions.name, req, error);
       next(error);
     }
   };
