@@ -1,12 +1,19 @@
 import { NextFunction, Request, Response } from "express";
+import { Logger } from "winston";
+import { createLogger, logError } from "../../utils";
 import { IGroupService } from "../services";
 import { IGroupController } from "./interfaces";
 
 class GroupController implements IGroupController {
   #groupService: IGroupService;
+  #logger: Logger;
+  #logError: (method: string, request: Request, error: unknown) => void;
 
   constructor(service: IGroupService) {
     this.#groupService = service;
+    this.#logger = createLogger("GROUP CONTROLLER");
+    this.#logError = (method: string, request: Request, error: unknown) =>
+      logError(this.#logger, method, request, error);
   }
 
   getOneById = async (req: Request, res: Response, next: NextFunction) => {
@@ -14,6 +21,7 @@ class GroupController implements IGroupController {
       const group = await this.#groupService.getOneById(req.params.id);
       res.send(group);
     } catch (error) {
+      this.#logError(this.getOneById.name, req, error);
       next(error);
     }
   };
@@ -23,6 +31,7 @@ class GroupController implements IGroupController {
       const group = await this.#groupService.createOne(req.body);
       return res.send(group);
     } catch (error) {
+      this.#logError(this.createOne.name, req, error);
       next(error);
     }
   };
@@ -34,6 +43,7 @@ class GroupController implements IGroupController {
       );
       return res.send(group);
     } catch (error) {
+      this.#logError(this.updateOneById.name, req, error);
       next(error);
     }
   };
@@ -42,14 +52,16 @@ class GroupController implements IGroupController {
       const group = await this.#groupService.deleteOneById(req.params.id);
       return res.send(group);
     } catch (error) {
+      this.#logError(this.deleteOneById.name, req, error);
       next(error);
     }
   };
-  getMany = async (_: Request, res: Response, next: NextFunction) => {
+  getMany = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const groups = await this.#groupService.getMany();
       res.send(groups);
     } catch (error) {
+      this.#logError(this.getMany.name, req, error);
       next(error);
     }
   };
@@ -61,6 +73,7 @@ class GroupController implements IGroupController {
       );
       res.send(group);
     } catch (error) {
+      this.#logError(this.addUsersToGroup.name, req, error);
       next(error);
     }
   };
