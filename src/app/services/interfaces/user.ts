@@ -9,6 +9,7 @@ interface IUserService {
     updates: Partial<IPreUserDto>
   ) => Promise<IUserDto | undefined>;
   getSuggestions: (login: string, limit: number) => Promise<Array<IUserDto>>;
+  login: (username: string, password: string) => Promise<string>;
 }
 
 export { IUserService };

@@ -32,6 +32,7 @@ const userRouter = Router()
     userController.updateOneById
   )
   // delete a user
-  .delete("/:id", validateIdInParams, userController.deleteOneById);
+  .delete("/:id", validateIdInParams, userController.deleteOneById)
+  .post("/login", userController.login);
 
 export { userRouter, BASE_ROUTE_PATH as BASE_USER_ROUTE_PATH };

@@ -1,4 +1,6 @@
+import { getToken } from "../../utils";
 import { IPreUserDto } from "../dto/user";
+import { Authorization } from "../errors";
 import { IUserRepository } from "../repositories/interfaces";
 import { IUserService } from "./interfaces";
 
@@ -7,6 +9,21 @@ class UserService implements IUserService {
   constructor(repositories: IUserRepository) {
     this.#userRepositories = repositories;
   }
+
+  login = async (username: string, password: string) => {
+    const user = await this.#userRepositories.getUserByLoginAndPassword(
+      username,
+      password
+    );
+
+    if (user) {
+      const token = getToken(user);
+
+      return token;
+    } else {
+      throw new Authorization("invalid username or password");
+    }
+  };
 
   createOne = (user: IPreUserDto) => {
     return this.#userRepositories.createOne(user);

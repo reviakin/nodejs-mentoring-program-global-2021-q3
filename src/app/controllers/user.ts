@@ -19,6 +19,24 @@ class UserController {
       logError(this.#logger, method, request, error);
   }
 
+  login = async (
+    req: IRequest<{ username: string; password: string }>,
+    res: IResponse,
+    next: NextFunction
+  ) => {
+    try {
+      const token = await this.#userService.login(
+        req.body.username,
+        req.body.password
+      );
+
+      res.send(token);
+    } catch (error) {
+      this.#logError(this.login.name, req, error);
+      next(error);
+    }
+  };
+
   getOneById = async (
     req: IRequest<unknown, IUserDto | undefined, ParamsDictionary>,
     res: IResponse<IUserDto | undefined>,
