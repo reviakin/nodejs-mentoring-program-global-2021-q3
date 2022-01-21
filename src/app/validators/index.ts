@@ -2,6 +2,7 @@ import {
   validateCreateUserBody,
   validateUpdateUserBody,
   validateParamsForSuggestions,
+  validateLoginUserParams,
 } from "./user";
 import { validateIdInParams } from "./validateIdInParams";
 import { validateCreateGroupBody, validateUpdateGroupBody } from "./group";
@@ -13,4 +14,5 @@ export {
   validateIdInParams,
   validateUpdateGroupBody,
   validateCreateGroupBody,
+  validateLoginUserParams,
 };

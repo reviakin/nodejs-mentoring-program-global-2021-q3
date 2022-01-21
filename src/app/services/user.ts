@@ -1,4 +1,4 @@
-import { getToken } from "../../utils";
+import { makeToken } from "../../utils";
 import { IPreUserDto } from "../dto/user";
 import { Authorization } from "../errors";
 import { IUserRepository } from "../repositories/interfaces";
@@ -17,7 +17,7 @@ class UserService implements IUserService {
     );
 
     if (user) {
-      const token = getToken(user);
+      const token = makeToken(user);
 
       return token;
     } else {

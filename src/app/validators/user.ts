@@ -28,6 +28,11 @@ const getSuggestionsSchema = Joi.object().keys({
   login: Joi.string().required(),
 });
 
+const loginSchema = Joi.object().keys({
+  password: Joi.number().required(),
+  username: Joi.string().required(),
+});
+
 const validateParamsForSuggestions: RequestHandler = (req, res, next) => {
   const { error } = validate(
     {
@@ -61,9 +66,23 @@ const validateCreateUserBody: RequestHandler = (req, res, next) => {
   return res.status(400).json({ data: error });
 };
 
+const validateLoginUserParams: RequestHandler = (req, res, next) => {
+  const { error } = validate(
+    {
+      username: Number(req.params.limit),
+      password: req.params.login,
+    },
+    loginSchema
+  );
+  if (!error) {
+    return next();
+  }
+  return res.status(400).json(error);
+};
+
 export {
   validateCreateUserBody,
   validateUpdateUserBody,
   validateParamsForSuggestions,
-  validateIdInParams,
+  validateLoginUserParams,
 };

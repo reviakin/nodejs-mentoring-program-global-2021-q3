@@ -9,6 +9,7 @@ import { GroupService } from "../services";
 import { GroupRepository, UserGroupRepository } from "../repositories";
 import { GroupModel, groupMapper } from "../models";
 import { validateAddUsersToGroup } from "../validators/group";
+import { checkToken } from "../middlewares";
 
 const groupController = new GroupController(
   new GroupService(
@@ -20,16 +21,18 @@ const groupController = new GroupController(
 const BASE_ROUTE_PATH = "/groups";
 
 const groupRouter = Router()
-  .get("/:id", validateIdInParams, groupController.getOneById)
-  .get("/", groupController.getMany)
+  .get("/:id", checkToken, validateIdInParams, groupController.getOneById)
+  .get("/", checkToken, groupController.getMany)
   .post(
     "/:id",
+    checkToken,
     validateIdInParams,
     validateCreateGroupBody,
     groupController.createOne
   )
   .put(
     "/:id",
+    checkToken,
     validateIdInParams,
     validateUpdateGroupBody,
     groupController.updateOneById
@@ -37,6 +40,7 @@ const groupRouter = Router()
   .delete("/:id", validateIdInParams, groupController.deleteOneById)
   .post(
     "/add_users/:id",
+    checkToken,
     validateIdInParams,
     validateAddUsersToGroup,
     groupController.addUsersToGroup
