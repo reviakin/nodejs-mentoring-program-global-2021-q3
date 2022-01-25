@@ -5,13 +5,13 @@ import { IUserRepository } from "../repositories/interfaces";
 import { IUserService } from "./interfaces";
 
 class UserService implements IUserService {
-  #userRepositories: IUserRepository;
+  private userRepositories: IUserRepository;
   constructor(repositories: IUserRepository) {
-    this.#userRepositories = repositories;
+    this.userRepositories = repositories;
   }
 
   login = async (username: string, password: string) => {
-    const user = await this.#userRepositories.getUserByLoginAndPassword(
+    const user = await this.userRepositories.getUserByLoginAndPassword(
       username,
       password
     );
@@ -26,22 +26,22 @@ class UserService implements IUserService {
   };
 
   createOne = (user: IPreUserDto) => {
-    return this.#userRepositories.createOne(user);
+    return this.userRepositories.createOne(user);
   };
 
   getOneById = (id: string) => {
-    return this.#userRepositories.getOneById(id);
+    return this.userRepositories.getOneById(id);
   };
 
   getSuggestions = (substring: string, limit: number) => {
-    return this.#userRepositories.getSuggestions(substring, limit);
+    return this.userRepositories.getSuggestions(substring, limit);
   };
 
   updateOneById = (id: string, updates: Partial<IPreUserDto>) => {
-    return this.#userRepositories.updateOneById(id, updates);
+    return this.userRepositories.updateOneById(id, updates);
   };
   deleteOneById = (id: string) => {
-    return this.#userRepositories.deleteOneById(id);
+    return this.userRepositories.deleteOneById(id);
   };
 }
 

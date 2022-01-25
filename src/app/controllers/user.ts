@@ -8,15 +8,15 @@ import { Logger } from "winston";
 import { logError } from "../../utils";
 
 class UserController {
-  #userService: IUserService;
-  #logger: Logger;
-  #logError: (method: string, request: Request, error: unknown) => void;
+  private userService: IUserService;
+  private logger: Logger;
+  private logError: (method: string, request: Request, error: unknown) => void;
 
   constructor(service: IUserService) {
-    this.#userService = service;
-    this.#logger = createLogger("USER CONTROLLER");
-    this.#logError = (method: string, request: Request, error: unknown) =>
-      logError(this.#logger, method, request, error);
+    this.userService = service;
+    this.logger = createLogger("USER CONTROLLER");
+    this.logError = (method: string, request: Request, error: unknown) =>
+      logError(this.logger, method, request, error);
   }
 
   login = async (
@@ -25,14 +25,14 @@ class UserController {
     next: NextFunction
   ) => {
     try {
-      const token = await this.#userService.login(
+      const token = await this.userService.login(
         req.body.username,
         req.body.password
       );
 
       res.send(token);
     } catch (error) {
-      this.#logError(this.login.name, req, error);
+      this.logError(this.login.name, req, error);
       next(error);
     }
   };
@@ -43,10 +43,10 @@ class UserController {
     next: NextFunction
   ) => {
     try {
-      const user = await this.#userService.getOneById(req.params.id);
+      const user = await this.userService.getOneById(req.params.id);
       res.send(user);
     } catch (error) {
-      this.#logError(this.getOneById.name, req, error);
+      this.logError(this.getOneById.name, req, error);
       next(error);
     }
   };
@@ -56,10 +56,10 @@ class UserController {
     next: NextFunction
   ) => {
     try {
-      const user = await this.#userService.createOne(req.body);
+      const user = await this.userService.createOne(req.body);
       return res.send(user);
     } catch (error) {
-      this.#logError(this.createOne.name, req, error);
+      this.logError(this.createOne.name, req, error);
       next(error);
     }
   };
@@ -69,13 +69,13 @@ class UserController {
     next: NextFunction
   ) => {
     try {
-      const user = await this.#userService.updateOneById(
+      const user = await this.userService.updateOneById(
         req.params.id,
         req.body
       );
       return res.send(user);
     } catch (error) {
-      this.#logError(this.updateOneById.name, req, error);
+      this.logError(this.updateOneById.name, req, error);
       next(error);
     }
   };
@@ -85,10 +85,10 @@ class UserController {
     next: NextFunction
   ) => {
     try {
-      const user = await this.#userService.deleteOneById(req.params.id);
+      const user = await this.userService.deleteOneById(req.params.id);
       return res.send(user);
     } catch (error) {
-      this.#logError(this.deleteOneById.name, req, error);
+      this.logError(this.deleteOneById.name, req, error);
       next(error);
     }
   };
@@ -98,13 +98,13 @@ class UserController {
     next: NextFunction
   ) => {
     try {
-      const users = await this.#userService.getSuggestions(
+      const users = await this.userService.getSuggestions(
         req.params.login,
         Number(req.params.limit)
       );
       res.send(users);
     } catch (error) {
-      this.#logError(this.getSuggestions.name, req, error);
+      this.logError(this.getSuggestions.name, req, error);
       next(error);
     }
   };

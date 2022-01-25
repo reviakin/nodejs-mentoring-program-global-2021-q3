@@ -4,9 +4,9 @@ import { IUserGroupInstance } from "../models/userGroup/interfaces";
 import { UserGroupModel } from "../models";
 
 class UserGroupRepository {
-  #userGroupModel: ModelCtor<IUserGroupInstance>;
+  private userGroupModel: ModelCtor<IUserGroupInstance>;
   constructor() {
-    this.#userGroupModel = UserGroupModel;
+    this.userGroupModel = UserGroupModel;
   }
 
   addUsersToGroup = async (groupId: string, usersIds: Array<string>) => {
