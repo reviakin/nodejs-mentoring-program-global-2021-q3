@@ -30,7 +30,7 @@ const userRouter = Router()
   // get a user
   .get("/:id", checkToken, validateIdInParams, userController.getOneById)
   // create a user
-  .post("/", checkToken, validateCreateUserBody, userController.createOne)
+  .post("/", validateCreateUserBody, userController.createOne)
   // update a user
   .put(
     "/:id",
