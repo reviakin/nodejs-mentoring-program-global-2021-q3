@@ -9,7 +9,6 @@ class UserService implements IUserService {
   constructor(repositories: IUserRepository) {
     this.userRepositories = repositories;
   }
-
   login = async (username: string, password: string) => {
     const user = await this.userRepositories.getUserByLoginAndPassword(
       username,
@@ -17,7 +16,11 @@ class UserService implements IUserService {
     );
 
     if (user) {
-      const token = makeToken(user);
+      const token = makeToken({
+        login: user.login,
+        age: user.age,
+        id: user.id,
+      });
 
       return token;
     } else {
