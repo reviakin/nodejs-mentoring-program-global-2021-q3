@@ -3,11 +3,10 @@ import {
   JsonWebTokenError,
   NotBeforeError,
   TokenExpiredError,
-  verify,
 } from "jsonwebtoken";
-import { JWT_SECRET } from "../../config";
 import { getTokenFromRequestHeader } from "../../utils";
 import { Authorization, Forbidden } from "../errors";
+import { tokenService } from "../services";
 
 export function checkToken(req: Request, _: Response, next: NextFunction) {
   const token = getTokenFromRequestHeader(req);
@@ -17,7 +16,7 @@ export function checkToken(req: Request, _: Response, next: NextFunction) {
   }
 
   try {
-    verify(token, JWT_SECRET);
+    tokenService.verifyToken(token);
   } catch (error) {
     let message = "invalid token";
 

@@ -1,11 +1,13 @@
-import { makeToken } from "../../utils";
 import { IPreUserDto } from "../dto/user";
 import { Authorization } from "../errors";
 import { IUserRepository } from "../repositories/interfaces";
 import { IUserService } from "./interfaces";
+import { tokenService } from "./token";
 
 class UserService implements IUserService {
   private userRepositories: IUserRepository;
+  private tokenService = tokenService;
+
   constructor(repositories: IUserRepository) {
     this.userRepositories = repositories;
   }
@@ -16,7 +18,7 @@ class UserService implements IUserService {
     );
 
     if (user) {
-      const token = makeToken({
+      const token = this.tokenService.makeToken({
         login: user.login,
         age: user.age,
         id: user.id,
