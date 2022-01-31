@@ -9,6 +9,10 @@ interface IUserRepository {
     updates: Partial<IPreUserDto>
   ) => Promise<IUserDto | undefined>;
   getSuggestions: (login: string, limit: number) => Promise<Array<IUserDto>>;
+  getUserByLoginAndPassword: (
+    login: string,
+    password: string
+  ) => Promise<IUserDto | undefined>;
 }
 
 export { IUserRepository };
