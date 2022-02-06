@@ -11,7 +11,11 @@ const GroupModel = dbConnection.define<IGroupInstance>("Group", {
     unique: true,
   },
   name: { type: DataTypes.STRING, allowNull: false, unique: true },
-  permissions: { type: DataTypes.ARRAY, allowNull: false, defaultValue: [] },
+  permissions: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+    allowNull: false,
+    defaultValue: [],
+  },
 });
 
 export { GroupModel };
