@@ -57,7 +57,7 @@ class UserController {
   ) => {
     try {
       const user = await this.userService.createOne(req.body);
-      return res.send(user);
+      return res.send(user).status(201);
     } catch (error) {
       this.logError(this.createOne.name, req, error);
       next(error);
