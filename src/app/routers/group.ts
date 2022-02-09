@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
-  validateIdInParams,
   validateCreateGroupBody,
+  validateIdInParams,
   validateUpdateGroupBody,
 } from "../validators";
 import { GroupController } from "../controllers";
@@ -23,13 +23,7 @@ const BASE_ROUTE_PATH = "/groups";
 const groupRouter = Router()
   .get("/:id", checkToken, validateIdInParams, groupController.getOneById)
   .get("/", checkToken, groupController.getMany)
-  .post(
-    "/:id",
-    checkToken,
-    validateIdInParams,
-    validateCreateGroupBody,
-    groupController.createOne
-  )
+  .post("/", checkToken, validateCreateGroupBody, groupController.createOne)
   .put(
     "/:id",
     checkToken,
@@ -37,7 +31,7 @@ const groupRouter = Router()
     validateUpdateGroupBody,
     groupController.updateOneById
   )
-  .delete("/:id", validateIdInParams, groupController.deleteOneById)
+  .delete("/:id", checkToken, validateIdInParams, groupController.deleteOneById)
   .post(
     "/add_users/:id",
     checkToken,

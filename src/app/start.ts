@@ -7,9 +7,8 @@ import { setupMiddlewares } from "./middlewares";
 import { setupProcessHandlers } from "./processHandlers";
 
 async function start() {
+  const service = express();
   try {
-    const service = express();
-
     await setupModels();
     setupRoutes(service);
     setupMiddlewares(service);
@@ -21,6 +20,8 @@ async function start() {
   } catch (error) {
     console.error(error);
   }
+
+  return service;
 }
 
 export { start };

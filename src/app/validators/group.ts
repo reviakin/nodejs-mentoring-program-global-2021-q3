@@ -19,7 +19,7 @@ const groupPermissionsSchema = Joi.array()
   );
 
 const createGroupSchema = Joi.object().keys({
-  login: Joi.string().required(),
+  name: Joi.string().required(),
   permissions: groupPermissionsSchema,
 });
 
@@ -64,4 +64,5 @@ export {
   validateCreateGroupBody,
   validateUpdateGroupBody,
   validateAddUsersToGroup,
+  permissions,
 };

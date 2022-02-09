@@ -29,7 +29,7 @@ class GroupController implements IGroupController {
   createOne = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const group = await this.groupService.createOne(req.body);
-      return res.send(group);
+      return res.send(group).status(201);
     } catch (error) {
       this.logError(this.createOne.name, req, error);
       next(error);

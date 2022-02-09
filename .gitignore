@@ -2,3 +2,4 @@ node_modules
 dist
 src/task2/txt/**
 src/task2/csv/**
+**/*.log
